@@ -8,7 +8,7 @@
       </tr>
       <tr v-for="report in reports" v-bind:key="report.index">
         <td>{{reports.length - reports.indexOf(report)}}</td>
-        <td>{{report.title}}</td>
+        <td>{{report.title}} | {{report.date}}</td>
         <td>
           <button v-on:click="getReport(reports.length - reports.indexOf(report))">Открыть</button>
         </td>

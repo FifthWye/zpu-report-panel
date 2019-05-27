@@ -1,5 +1,5 @@
 <template>
-  <div v-if="mode == 2">
+  <div v-if="mode == 2 || mode == -2">
     <ReportsTable
       v-on:get-report="setCurrentReport"
       v-if="!currentReport"
@@ -44,7 +44,7 @@ export default {
   methods: {
     getReports() {
       axios
-        .get("http://localhost/report-panel/api/office/reports.php", {
+        .get("/api/office/reports.php", {
           params: {
             request: 1
           }
@@ -59,7 +59,7 @@ export default {
     },
     getReport(value) {
       axios
-        .get("http://localhost/report-panel/api/office/rows.php", {
+        .get("/api/office/rows.php", {
           //fix sql injections on server side
           params: {
             request: 1,

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="mode != 1 && mode != 2">
+  <div v-if="mode != 1 && mode != 2 && mode != -1 && mode != -2">
     <form action method="post">
       <label>Еmail:</label>
       <br>
@@ -31,7 +31,7 @@ export default {
       userData.append("email", this.email);
       userData.append("password", this.password);
       axios
-        .post("http://localhost/report-panel/api/login.php", userData) //fix sql injections on server side
+        .post("/api/login.php", userData) //fix sql injections on server side
         .then(response => {
           this.mode = response.data["mode"];
           localStorage.currentUser = response.data["userId"];

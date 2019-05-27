@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1 v-if="!edit">{{title}}</h1>
-    <input v-focus v-if="edit" v-model="title" maxlength="30" placeholder="Enter your title">
-    <button v-if="!edit" class="edit" v-on:click="editTitle()">Edit</button>
-    <button v-if="edit" class="save" v-on:click="editTitle()">Save</button>
+    <input v-focus v-if="edit" v-model="title" maxlength="30" placeholder="Введите название отчета">
+    <button v-if="!edit" class="edit" v-on:click="editTitle()">Редактировать</button>
+    <button v-if="edit" class="save" v-on:click="editTitle()">Сохранить</button>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ div {
 
 h1 {
   display: inline-block;
-  width: 75%;
+  width: 70%;
   height: 100%;
   overflow: hidden;
 }
@@ -67,7 +67,7 @@ img {
 
 button {
   height: 100%;
-  width: 25%;
+  width: 30%;
   float: right;
   font-weight: bold;
   border: none;
@@ -93,7 +93,7 @@ button:focus {
 
 input {
   height: 100%;
-  width: 75%;
+  width: 70%;
   display: inline-block;
   border: none;
   font-size: 24px;

@@ -2,6 +2,7 @@
   <div id="app">
     <div class="container">
       <Auth v-on:get-mode="setMode"/>
+      <Mode :panelMode="mode" v-on:get-mode="setMode"/>
       <Port :panelMode="mode"/>
       <Office :panelMode="mode"/>
     </div>
@@ -10,6 +11,7 @@
 
 <script>
 import Auth from "./components/Auth";
+import Mode from "./components/Mode";
 import Port from "./components/Port/Port";
 import Office from "./components/Office/Office";
 
@@ -18,7 +20,8 @@ export default {
   components: {
     Port,
     Office,
-    Auth
+    Auth,
+    Mode
   },
   data: function() {
     return {

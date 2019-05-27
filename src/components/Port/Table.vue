@@ -61,7 +61,7 @@ table {
   text-align: left;
   border-collapse: collapse;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 th,
@@ -76,16 +76,18 @@ th:first-child {
   width: 4%;
 }
 
+@media only screen and (min-width: 0px) and (max-width: 320px) {
+  th:first-child {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 0px) and (max-width: 440px) {
   th,
   td {
     padding: 0;
     border: none;
     border-bottom: 1px solid #ddd;
-  }
-
-  th:first-child {
-    display: none;
   }
 }
 

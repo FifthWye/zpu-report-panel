@@ -90,8 +90,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Form",
   data() {
@@ -114,6 +112,18 @@ export default {
     tableData: {
       type: Array,
       required: true
+    },
+    tableErrors: {
+      type: Array,
+      required: true
+    }
+  },
+  watch: {
+    tableData: function(value) {
+      this.report = value;
+    },
+    tableErrors: function(value) {
+      this.errors = this.errors.concat(value);
     }
   },
   methods: {
@@ -288,5 +298,15 @@ select {
   padding-bottom: 20px;
   border: 1px solid #f44336;
   text-align: center;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 560px) {
+  select {
+    width: 25%;
+  }
+
+  .container-input {
+    width: 75%;
+  }
 }
 </style>

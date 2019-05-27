@@ -14,6 +14,7 @@
     </td>
     <td v-if="this.edit">
       <input
+        v-on:keypress="isNumber($event)"
         v-model="platform"
         pattern="\d{8}"
         maxlength="8"
@@ -26,6 +27,7 @@
     </td>
     <td v-if="this.edit">
       <input
+        v-on:keypress="isNumber($event)"
         v-model="container1"
         pattern="\d{2,3}"
         maxlength="5"
@@ -37,6 +39,7 @@
       >
       <br>
       <input
+        v-on:keypress="isNumber($event)"
         v-model="container2"
         pattern="\d{2,3}"
         maxlength="5"
@@ -49,6 +52,7 @@
     </td>
     <td v-if="this.edit">
       <input
+        v-on:keypress="isZPU($event, ZPU1)"
         v-model="ZPU1"
         pattern="^[a-zA-Zа-яА-Я]{1}[0-9]{6}$"
         maxlength="7"
@@ -59,6 +63,7 @@
       >
       <br>
       <input
+        v-on:keypress="isZPU($event, ZPU2)"
         v-model="ZPU2"
         pattern="^[a-zA-Zа-яА-Я]{1}[0-9]{6}$"
         maxlength="7"
@@ -88,6 +93,7 @@ export default {
     return {
       index: this.rowIndex,
       edit: false,
+      errors: ["Первый контейнер уже есть в списке"],
       platform: this.rowData.platform,
       container1: this.rowData.container1,
       container2: this.rowData.container2,
@@ -124,6 +130,35 @@ export default {
 
       row.rowIndex = this.index;
       this.$emit("edit-row", row);
+    },
+    isZPU(evt, str) {
+      //var charCode = evt.which ? evt.which : evt.keyCode;
+      var char = String.fromCharCode(evt.keyCode);
+
+      if (str.length > 0) {
+        this.isNumber(evt);
+      } else {
+        if (this.isChar(char)) {
+          return true;
+        } else {
+          evt.preventDefault();
+        }
+      }
+    },
+    isNumber(evt) {
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    },
+    isChar(char) {
+      if (char.match(/[a-zA-Zа-яА-Я]/i)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   watch: {
@@ -141,6 +176,12 @@ export default {
 };
 </script>
 <style scoped>
+div {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
 th,
 td {
   border: 1px solid #ddd;
@@ -182,6 +223,12 @@ input {
   width: 85%;
 }
 
+@media only screen and (min-width: 0px) and (max-width: 320px) {
+  td:first-child {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 0px) and (max-width: 440px) {
   th,
   td {
@@ -192,10 +239,6 @@ input {
 
   button {
     margin-right: 5px;
-  }
-
-  td:first-child {
-    display: none;
   }
 }
 
